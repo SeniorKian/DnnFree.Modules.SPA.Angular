@@ -1,0 +1,3 @@
+[submodule "clientApp"]
+	path = clientApp
+	url = https://hamgit.ir/mrkiani/dnnmodule-angular-clientapp.git
