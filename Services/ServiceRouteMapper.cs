@@ -4,7 +4,6 @@ using System.Web.Http;
 
 namespace DnnFree.Modules.SPA.Angular
 {
-
     /// <summary>
     /// The ServiceRouteMapper tells the DNN Web API Framework what routes this module uses
     /// </summary>
@@ -19,10 +18,9 @@ namespace DnnFree.Modules.SPA.Angular
             mapRouteManager.MapHttpRoute(
                 moduleFolderName: "DnnFree.Modules.SPA.Angular",
                 routeName: "default",
-                url: "{controller}/{itemId}",
+                url: "{controller}/{action}/{itemId}",
                 defaults: new { itemId = RouteParameter.Optional },
                 namespaces: new[] { "DnnFree.Modules.SPA.Angular" });
         }
     }
-
 }
