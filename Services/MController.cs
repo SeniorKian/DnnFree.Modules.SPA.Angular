@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Security;
+using DotNetNuke.Security.Permissions;
 using DotNetNuke.Web.Api;
 using System;
 using System.Linq;
@@ -63,6 +64,61 @@ namespace DnnFree.Modules.SPA.Angular
             var moduleId = GetModuleId();
             string response = "UserAccess : " + moduleId + "\nUser :" + UserInfo.DisplayName;
             return Request.CreateResponse(response);
+        }
+
+        [HttpGet]
+        [DnnAuthorize] // 👈 فقط کاربرهای لاگین شده
+        public HttpResponseMessage GetCurrentUser()
+        {
+            var user = new
+            {
+                UserId = UserInfo.UserID,
+                Username = UserInfo.Username,
+                DisplayName = UserInfo.DisplayName,
+                Email = UserInfo.Email,
+                FirstName = UserInfo.FirstName,
+                LastName = UserInfo.LastName,
+                IsSuperUser = UserInfo.IsSuperUser, // آیا ادمین کل سایته؟
+
+                // نقش‌های کاربر
+                Roles = UserInfo.Roles,
+                // دسترسی‌های ماژول
+                IsAdmin = UserInfo.IsInRole(PortalSettings.AdministratorRoleName),
+
+                // اطلاعات پورتال
+                PortalId = PortalSettings.PortalId,
+                ModuleId = GetModuleId()
+            };
+
+            return Request.CreateResponse(HttpStatusCode.OK, user);
+        }
+
+        [HttpGet]
+        [DnnAuthorize]
+        public HttpResponseMessage CheckPermissions()
+        {
+            var moduleId = GetModuleId();
+
+            var permissions = new
+            {
+                CanEdit = ModulePermissionController.HasModuleAccess(
+                    SecurityAccessLevel.Edit,
+                    "EDIT",
+                    ActiveModule
+                ),
+
+                CanView = ModulePermissionController.HasModuleAccess(
+                    SecurityAccessLevel.View,
+                    "VIEW",
+                    ActiveModule
+                ),
+
+                IsModuleAdmin = UserInfo.IsInRole(PortalSettings.AdministratorRoleName),
+
+                IsSuperUser = UserInfo.IsSuperUser
+            };
+
+            return Request.CreateResponse(HttpStatusCode.OK, permissions);
         }
     }
 }

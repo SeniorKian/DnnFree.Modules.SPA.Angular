@@ -57,10 +57,19 @@
       <HintPath>..\..\..\..\..\..\___OLIMPIADE\__DEV\Web_Dev\bin\DotNetNuke.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=9.13.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.Client.9.13.9\lib\net45\DotNetNuke.Web.Client.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\___OLIMPIADE\__DEV\Web_Dev\bin\DotNetNuke.WebUtility.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -115,6 +124,10 @@
   <ItemGroup>
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View.ascx.cs">
+      <DependentUpon>View.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\MController.cs" />
@@ -126,7 +139,7 @@
   <ItemGroup>
     <Content Include="License.txt" />
     <Content Include="ReleaseNotes.txt" />
-    <Content Include="View.html" />
+    <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
